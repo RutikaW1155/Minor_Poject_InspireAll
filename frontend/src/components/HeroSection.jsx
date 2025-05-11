@@ -1,5 +1,6 @@
 import React from 'react';
 import './HeroSection.css';
+import { Link } from 'react-router-dom';
 
 function HeroSection() {
   return (
@@ -11,8 +12,10 @@ function HeroSection() {
       </p>
       <div class="hero-buttons">
         <button class="btn btn-purple">Get Started</button>
-        <button class="btn btn-green">Chat with InspireBot</button>
-        <button class="btn btn-outline">Join the Community</button>
+   <Link to="/multilingualchatbot">
+          <button className="btn btn-green">Chat with InspireBot</button>
+        </Link>   
+             <button class="btn btn-outline">Join the Community</button>
       </div>
     </div>
   

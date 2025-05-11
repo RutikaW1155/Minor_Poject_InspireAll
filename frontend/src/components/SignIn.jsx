@@ -15,7 +15,7 @@ function SignIn() {
       const response = await axios.post('http://localhost:5000/login', { email, password });
 
       alert(response.data.message || "SignIn successful");
-      navigate('/Mainpage', { replace: true });
+      navigate('/', { replace: true });
     } catch (error) {
       alert('Error logging in: ' + error.response?.data || 'Please try again');
     }

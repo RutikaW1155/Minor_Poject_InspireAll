@@ -3,7 +3,7 @@ import './HowItWorks.css';
 
 function HowItWorks() {
   const steps = [
-    { id: 1, title: "Sign Up & Select Language", img: "/images/step1.png", desc: "Create your account using phone, email, or voice call and choose from 9+ Indian languages." },
+    { id: 1, title: "Sign Up & Select Language", img: "https://img.freepik.com/free-vector/languages-concept-illustration_114360-19548.jpg?semt=ais_hybrid&w=800", desc: "Create your account using phone, email, or voice call and choose from 9+ Indian languages." },
     { id: 2, title: "Get Personalized Guidance", img: "/images/step2.png", desc: "Receive AI-powered business advice, access learning resources, and discover government schemes." },
     { id: 3, title: "Grow Your Business", img: "/images/step3.png", desc: "Connect with the marketplace, join the community, and scale your rural business." },
   ];
