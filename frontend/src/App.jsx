@@ -1,50 +1,63 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import HowItWorks from './components/HowItWorks';
 import CoreFeatures from './components/CoreFeatures';
 import StatsSection from './components/StatsSection';
-import MultilingualChatbot from './components/MultilingualChatbot';
-import BusinessInfo from './components/BusinessInfo';
-
 import Footer from './components/Footer';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-// import AppRouter from './router';
-// import DarkModeToggle from './components/DarkModeToggle';
+import BusinessInfo from './components/BusinessInfo';
+// import Schemes from './components/Schemes';
+
+function AuthSection() {
+  const { loginWithRedirect, logout, isAuthenticated, user, isLoading } = useAuth0();
+
+  if (isLoading) return <h2>Loading...</h2>;
+
+  return (
+    <div style={{ padding: '2rem', textAlign: 'center' }}>
+      <h1>Welcome to InspireAll 🚀</h1>
+
+      {!isAuthenticated ? (
+        <button onClick={() => loginWithRedirect()}>Sign in with Google</button>
+      ) : (
+        <>
+          <p>Logged in as: {user.name}</p>
+          <img src={user.picture} alt={user.name} style={{ borderRadius: '50%' }} />
+          <br />
+          <button onClick={() => logout({ returnTo: window.location.origin })}>Log out</button>
+        </>
+      )}
+    </div>
+  );
+}
 
 export default function App() {
   return (
     <BrowserRouter>
       <Header />
-
       <Routes>
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
             <>
               <HeroSection />
               <HowItWorks />
               <CoreFeatures />
               <StatsSection />
-              {/* <DarkModeToggle /> */}
-              {/* <AppRouter /> */}
+              <AuthSection />
             </>
-          } 
+          }
         />
-        <Route path="/BusinessInfo" element={<BusinessInfo />} />
-        <Route path="/DarkModeToggle" element={<SignIn />} />
-        <Route path="/AppRouter" element={<SignUp />} />
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
-
-         <Route
-          path="/multilingualchatbot"
-          element={<MultilingualChatbot />}
-        />
+        {/* <Route path="/Schemes" element={<Schemes />} /> */}
+        <Route path="/BusinessInfo" element={<BusinessInfo />} />
       </Routes>
-
       <Footer />
     </BrowserRouter>
   );
