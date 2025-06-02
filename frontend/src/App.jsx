@@ -11,6 +11,8 @@ import Footer from './components/Footer';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import BusinessInfo from './components/BusinessInfo';
+import PostSection from './components/PostSection';
+
 // import Schemes from './components/Schemes';
 
 function AuthSection() {
@@ -22,7 +24,7 @@ function AuthSection() {
     <div style={{ padding: '2rem', textAlign: 'center' }}>
       <h1>Welcome to InspireAll 🚀</h1>
 
-      {!isAuthenticated ? (
+      {/* {!isAuthenticated ? (
         <button onClick={() => loginWithRedirect()}>Sign in with Google</button>
       ) : (
         <>
@@ -31,7 +33,7 @@ function AuthSection() {
           <br />
           <button onClick={() => logout({ returnTo: window.location.origin })}>Log out</button>
         </>
-      )}
+      )} */}
     </div>
   );
 }
@@ -55,6 +57,7 @@ export default function App() {
         />
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
+        <Route path="/PostSection" element={<SignUp />} />
         {/* <Route path="/Schemes" element={<Schemes />} /> */}
         <Route path="/BusinessInfo" element={<BusinessInfo />} />
       </Routes>

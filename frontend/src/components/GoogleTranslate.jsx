@@ -10,7 +10,7 @@ const GoogleTranslate = () => {
           {
             pageLanguage: "en",
             includedLanguages:
-              "en,hi,pa,sa,mr,ur,bn,es,ja,ko,zh-CN,es,nl,fr,de,it,ta,te",
+               "en,hi,pa,sa,mr,ur,bn,gu,kn,ml,ta,te,or,as,ne",
             layout:
               window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
             defaultLanguage: "en",

@@ -11,9 +11,27 @@ const LANGUAGES = [
   { code: "en", label: "English" },
   { code: "hi", label: "Hindi" },
   { code: "mr", label: "Marathi" },
+  { code: "ml", label: "Malayalam" },
+  { code: "kn", label: "Kannada" },
   { code: "ta", label: "Tamil" },
   { code: "bn", label: "Bengali" },
   { code: "te", label: "Telugu" },
+  { code: "gu", label: "Gujarati" },
+
+  
+  { code: "pa", label: "Punjabi" },
+  { code: "or", label: "Odia" },
+  { code: "as", label: "Assamese" },
+  { code: "ur", label: "Urdu" },
+  { code: "ne", label: "Nepali" },
+  { code: "si", label: "Sinhala" },
+  { code: "ar", label: "Arabic" },
+  { code: "fr", label: "French" },
+  { code: "es", label: "Spanish" },
+  { code: "de", label: "German" },
+  { code: "zh", label: "Chinese (Simplified)" },
+  { code: "ja", label: "Japanese" },
+  { code: "ko", label: "Korean" },
   // Add more languages here
 ];
 
