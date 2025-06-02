@@ -4,23 +4,6 @@ import './BusinessInfo.css';
 const BusinessInfo = () => {
   return (
     <>
-      <header className="header">
-        <a href="#" className="logo">
-          <img src="/api/placeholder/40/40" alt="InspireAll Logo" />
-          <span>Inspire</span>All
-        </a>
-        <nav className="nav-links">
-          <a href="#">Profile</a>
-          <a href="#">Business Info</a>
-          <a href="#">Post</a>
-          <a href="#">Schemes</a>
-        </nav>
-        <div className="buttons">
-          <button className="btn btn-outline">Sign in</button>
-          <button className="btn btn-primary">Sign up</button>
-        </div>
-      </header>
-
       <section className="hero">
         <h1>Business Growth Strategies</h1>
         <p>
