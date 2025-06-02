@@ -20,7 +20,7 @@ function Header() {
       <nav className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <a href="#features">Profile</a>
         <Link to="/BusinessInfo">Business Info</Link>
-        <a href="#community">Post</a>
+        <a href="http://localhost:5173/" target="_blank" rel="noopener noreferrer">Post</a>
         <a href="#schemes">Schemes</a>
       </nav>
       <div className="translate-section">
