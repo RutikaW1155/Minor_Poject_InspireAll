@@ -13,6 +13,7 @@ import SignUp from './components/SignUp';
 import BusinessInfo from './components/BusinessInfo';
 import PostSection from './components/PostSection';
 
+
 // import Schemes from './components/Schemes';
 
 function AuthSection() {
@@ -60,6 +61,7 @@ export default function App() {
         <Route path="/PostSection" element={<SignUp />} />
         {/* <Route path="/Schemes" element={<Schemes />} /> */}
         <Route path="/BusinessInfo" element={<BusinessInfo />} />
+        {/* <Route path="/SchemeSearch" element={<SchemeSearchForm />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>

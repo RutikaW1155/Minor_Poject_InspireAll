@@ -1,69 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import './SignUp.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { z } from "zod";
+import "./SignUp.css";
 
-function SignUp() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [captcha, setCaptcha] = useState('');
-  const [userCaptcha, setUserCaptcha] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+const SignUp = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    userCaptcha: "",
+    role: "entrepreneur", // default
+  });
+
+  const [captcha, setCaptcha] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  // Generate 4-digit CAPTCHA
   useEffect(() => {
     generateCaptcha();
   }, []);
 
   const generateCaptcha = () => {
-    const newCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
-    setCaptcha(newCaptcha);
+    setCaptcha(Math.floor(1000 + Math.random() * 9000).toString());
   };
 
-  const validatePassword = (pwd) => {
-    // Minimum 8 chars, at least one letter and one number
-    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
-    return regex.test(pwd);
+  const validatePassword = (password) => {
+    const schema = z
+      .string()
+      .min(8, "Password must be at least 8 characters.")
+      .regex(/[A-Za-z]/, "Password must contain letters.")
+      .regex(/\d/, "Password must contain numbers.");
+    try {
+      schema.parse(password);
+      return true;
+    } catch (e) {
+      setErrorMessage(e.errors[0].message);
+      return false;
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage('');
+    setErrorMessage("");
 
-    if (!name || !email || !password || !userCaptcha) {
-      setErrorMessage('All fields including CAPTCHA are required.');
+    const { name, email, password, userCaptcha, role } = formData;
+
+    if (!name || !email || !password || !userCaptcha || !role) {
+      setErrorMessage("All fields are required.");
       return;
     }
 
-    if (!validatePassword(password)) {
-      setErrorMessage('Password must be at least 8 characters long and include letters and numbers.');
-      return;
-    }
+    if (!validatePassword(password)) return;
 
     if (userCaptcha !== captcha) {
-      setErrorMessage('CAPTCHA does not match.');
+      setErrorMessage("CAPTCHA mismatch. Try again.");
       generateCaptcha();
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:5000/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
+      const res = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, role }),
       });
 
-      if (response.ok) {
-        alert('Successfully Signed Up');
-        navigate('/SignIn');
+      if (res.ok) {
+        alert("Signup successful!");
+        generateCaptcha();
+        navigate(
+          role === "investor" ? "/profiles/InvestorProfile" : "/profiles/EntrepreneurProfile"
+        );
       } else {
-        const errorMsg = await response.text();
-        setErrorMessage('Error: ' + errorMsg);
+        const errorText = await res.text();
+        setErrorMessage("Signup failed: " + errorText);
+        generateCaptcha();
       }
     } catch (error) {
-      setErrorMessage('Failed to sign up. Please try again.');
+      console.error("Signup error:", error);
+      setErrorMessage("Server error. Please try again.");
     }
   };
 
@@ -74,37 +93,48 @@ function SignUp() {
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <label>Name</label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input name="name" value={formData.name} onChange={handleChange} required />
 
         <label>Email</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
 
         <label>Password</label>
         <input
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Min 8 chars, include letters & numbers"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Min 8 chars, letters & numbers"
           required
         />
 
-        <label>CAPTCHA: <strong>{captcha}</strong></label>
+        <label>
+          CAPTCHA: <strong>{captcha}</strong>
+        </label>
         <input
-          type="text"
-          value={userCaptcha}
-          onChange={(e) => setUserCaptcha(e.target.value)}
+          name="userCaptcha"
+          value={formData.userCaptcha}
+          onChange={handleChange}
           placeholder="Enter CAPTCHA"
           required
         />
+
+        <label>Role:</label>
+        <select name="role" value={formData.role} onChange={handleChange}>
+          <option value="entrepreneur">Village Entrepreneur</option>
+          <option value="investor">Investor</option>
+        </select>
 
         <button type="submit">Sign Up</button>
       </form>
 
       <div className="login-link">
-        <p>Already have an account? <Link to="/SignIn">Sign In</Link></p>
+        <p>
+          Already have an account? <Link to="/SignIn">Sign In</Link>
+        </p>
       </div>
     </div>
   );
-}
+};
 
 export default SignUp;
