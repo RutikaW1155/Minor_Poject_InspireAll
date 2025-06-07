@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './Header.css';
-import logo from '/loo.png'; // Replace this with your actual logo path
-import GoogleTranslate from './GoogleTranslate';
 import { Link } from 'react-router-dom';
+import './Header.css';
+import logo from '/loo.png'; // Ensure this path is correct
+import GoogleTranslate from './GoogleTranslate';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,20 +18,26 @@ function Header() {
       </Link>
 
       <nav className={`nav-links ${menuOpen ? 'open' : ''}`}>
-        <a href="#features">Profile</a>
+        <Link to="/profiles/EntrepreneurProfile">Profile</Link>
         <Link to="/BusinessInfo">Business Info</Link>
         <a href="http://localhost:5173/" target="_blank" rel="noopener noreferrer">Post</a>
-        <a href="#schemes">Schemes</a>
+        <Link to="/SchemeSearchForm">Schemes</Link>
       </nav>
+
       <div className="translate-section">
         <GoogleTranslate />
       </div>
-      <Link to="/SignIn">
-        <button className="signin-btn">Sign in</button>
-      </Link>
-      <Link to="/SignUp">
-        <button className="signup-btn">Sign up</button>
-      </Link>
+
+      <div className="auth-buttons">
+        <Link to="/SignIn">
+          <button className="signin-btn">Sign in</button>
+        </Link>
+        <Link to="/SignUp">
+          <button className="signup-btn">Sign up</button>
+        </Link>
+      
+      </div>
+
       <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
         <div className="bar"></div>
         <div className="bar"></div>
@@ -42,4 +48,3 @@ function Header() {
 }
 
 export default Header;
-
