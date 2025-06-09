@@ -9,7 +9,7 @@ const SignUp = () => {
     email: "",
     password: "",
     userCaptcha: "",
-    role: "entrepreneur", // default
+    role: "Select Role",
   });
 
   const [captcha, setCaptcha] = useState("");
@@ -30,6 +30,7 @@ const SignUp = () => {
       .min(8, "Password must be at least 8 characters.")
       .regex(/[A-Za-z]/, "Password must contain letters.")
       .regex(/\d/, "Password must contain numbers.");
+
     try {
       schema.parse(password);
       return true;
@@ -69,15 +70,19 @@ const SignUp = () => {
         body: JSON.stringify({ name, email, password, role }),
       });
 
+      const result = await res.text();
+
       if (res.ok) {
         alert("Signup successful!");
         generateCaptcha();
         navigate(
-          role === "investor" ? "/profiles/InvestorProfile" : "/profiles/EntrepreneurProfile"
-        );
+  role === "investor"
+    ? "/profiles/InvestorProfile"
+    : "/profiles/EntrepreneurProfile"
+);
+
       } else {
-        const errorText = await res.text();
-        setErrorMessage("Signup failed: " + errorText);
+        setErrorMessage("Signup failed: " + result);
         generateCaptcha();
       }
     } catch (error) {
@@ -108,9 +113,7 @@ const SignUp = () => {
           required
         />
 
-        <label>
-          CAPTCHA: <strong>{captcha}</strong>
-        </label>
+        <label>CAPTCHA: <strong>{captcha}</strong></label>
         <input
           name="userCaptcha"
           value={formData.userCaptcha}
@@ -119,22 +122,37 @@ const SignUp = () => {
           required
         />
 
-        <label>Role:</label>
-        <select name="role" value={formData.role} onChange={handleChange}>
-          <option value="entrepreneur">Village Entrepreneur</option>
-          <option value="investor">Investor</option>
-        </select>
+        <RoleSelector formData={formData} handleChange={handleChange} />
 
         <button type="submit">Sign Up</button>
       </form>
 
       <div className="login-link">
-        <p>
-          Already have an account? <Link to="/SignIn">Sign In</Link>
-        </p>
+        <p>Already have an account? <Link to="/SignIn">Sign In</Link></p>
       </div>
     </div>
   );
 };
+
+const RoleSelector = ({ formData, handleChange }) => (
+  <div className="form-group">
+    <label htmlFor="role" className="form-label">
+      I am a... <span className="required">*</span>
+    </label>
+    <div className="select-wrapper">
+      <select
+        id="role"
+        name="role"
+        value={formData.role}
+        onChange={handleChange}
+        className="form-select"
+        required
+      >
+        <option value="entrepreneur">🚀 Entrepreneur</option>
+        <option value="investor">💼 Investor</option>
+      </select>
+    </div>
+  </div>
+);
 
 export default SignUp;

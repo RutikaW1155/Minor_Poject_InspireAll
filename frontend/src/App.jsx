@@ -16,6 +16,9 @@ import SchemeSearchForm from './components/SchemeSearchForm';
 import EntrepreneurProfile from './components/profiles/EntrepreneurProfile';
 import InvestorProfile from './components/profiles/InvestorProfile';
 import Resources from './pages/Resources';
+import EntrepreneurProfiles from "./components/profiles/EntrepreneurProfile";
+import InvestorProfiles from "./components/profiles/InvestorProfile";
+
 
 
 
@@ -57,6 +60,9 @@ const App = () => (
       <Route path="/PostSection" element={<PostSection />} />
       <Route path="/BusinessInfo" element={<BusinessInfo />} />
       <Route path="/SchemeSearchForm" element={<SchemeSearchForm />} />
+       <Route path="/profiles/EntrepreneurProfile" element={<EntrepreneurProfile />} />
+        <Route path="/profiles/InvestorProfile" element={<InvestorProfile />} />
+     
       {/* <Route
         path="/SchemeSearch"
         element={<SchemeSearchForm onResults={() => {}} onLoading={() => {}} toast={() => {}} />}
