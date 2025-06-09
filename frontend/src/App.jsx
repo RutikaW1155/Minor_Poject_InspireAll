@@ -15,6 +15,10 @@ import PostSection from './components/PostSection';
 import SchemeSearchForm from './components/SchemeSearchForm';
 import EntrepreneurProfile from './components/profiles/EntrepreneurProfile';
 import InvestorProfile from './components/profiles/InvestorProfile';
+import Resources from './pages/Resources';
+
+
+
 
 const AuthSection = () => {
   const { loginWithRedirect, logout, isAuthenticated, user, isLoading } = useAuth0();
@@ -25,16 +29,7 @@ const AuthSection = () => {
     <div style={{ padding: '2rem', textAlign: 'center' }}>
       <h1>Welcome to InspireAll 🚀</h1>
 
-      {!isAuthenticated ? (
-        <button onClick={loginWithRedirect}>Sign in with Google</button>
-      ) : (
-        <>
-          <p>Logged in as: {user.name}</p>
-          <img src={user.picture} alt={user.name} style={{ borderRadius: '50%' }} />
-          <br />
-          <button onClick={() => logout({ returnTo: window.location.origin })}>Log out</button>
-        </>
-      )}
+      
     </div>
   );
 };
@@ -57,6 +52,8 @@ const App = () => (
       />
       <Route path="/signIn" element={<SignIn />} />
       <Route path="/signUp" element={<SignUp />} />
+      <Route path="/resources" element={<Resources />} />
+
       <Route path="/PostSection" element={<PostSection />} />
       <Route path="/BusinessInfo" element={<BusinessInfo />} />
       <Route path="/SchemeSearchForm" element={<SchemeSearchForm />} />

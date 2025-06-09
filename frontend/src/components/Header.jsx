@@ -22,6 +22,11 @@ function Header() {
         <Link to="/BusinessInfo">Business Info</Link>
         <a href="http://localhost:5173/" target="_blank" rel="noopener noreferrer">Post</a>
         <Link to="/SchemeSearchForm">Schemes</Link>
+        {/* <Link to="/resource">Resources</Link>
+        import { Link } from 'react-router-dom'; */}
+
+<Link to="/resources" className="text-white hover:underline">Resources</Link>
+
       </nav>
 
       <div className="translate-section">
