@@ -31,7 +31,7 @@ function CoreFeatures() {
     {
       title: "Community Building",
       icon: <FaUsers />,
-      img: "https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      img: "/bussinessicons/employees-with-laptops-learning-professional-trainig_335657-3298.avif",
       desc: "Connect with fellow entrepreneurs for support, collaboration, and growth.",
     },
     {
@@ -51,7 +51,7 @@ function CoreFeatures() {
             <h3 className="feature-title">{feature.title}</h3>
             <p className="feature-description">{feature.desc}</p>
             <div className="feature-image-placeholder">
-              <img src="/images/placeholder.png" alt={feature.title} className="feature-image" />
+              <img src={feature.img} alt={feature.title} className="feature-image" />
             </div>
           </div>
         ))}
